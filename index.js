@@ -3,7 +3,6 @@ const express = require('express');
 const fs = require('fs');
 
 const app = express();
-const filtrosBermuda = require('/filtrosBermuda')
 
 let html = fs.readFileSync('index.html');
 
@@ -14,8 +13,6 @@ app.get('/', (req, res) => {
 app.get('/bermudas', (req, res) => {
   res.end(fs.readFileSync('bermudas.html'));
 })
-
-app.use('/bermudas', filtrosBermuda)
 
 app.get('/ajuda', (req, res) => {
   res.end(fs.readFileSync('ajuda.html'));
@@ -30,17 +27,20 @@ app.get('/camisetas', (req, res) => {
 })
 
 app.get('/produtos', (req, res) => {
-  res.end(fs.readFileSync('produtos.html'));
+  res.end(fs.readFileSync('produtos.js'));
 })
 
 app.get('/QS', (req, res) => {
   res.end(fs.readFileSync('QS.html'));
 })
 
+app.get('/comprar', (req, res) => {
+  res.end(fs.readFileSync('comprar.html'));
+})
+
 app.get('/index', (req, res) => {
   res.end(fs.readFileSync('index.html'));
 })
-
 app.listen(3000, () => {
   console.log('Servidor iniciado...');
 });
