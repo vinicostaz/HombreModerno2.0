@@ -17,10 +17,6 @@ app.get('/bermudas', (req, res) => {
 
 app.use('/bermudas', filtrosBermuda)
 
-app.get('/bermudas', (req, res) => {
-  res.end(fs.readFileSync('bermudaPreta.html'));
-})
-
 app.get('/ajuda', (req, res) => {
   res.end(fs.readFileSync('ajuda.html'));
 })
