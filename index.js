@@ -1,4 +1,4 @@
-const express = require('express');
+                             const express = require('express');
 const fs = require('fs');
 
 const app = express();
@@ -77,11 +77,11 @@ app.post('/comprar', (req, res) => {
     val1 = Number(22);
   }
   var val2 = req.body.val2;
-  if(val2 == "Bermuda Branco" || "Bermuda Bege" || "Bermuda Preta"){
+  if(val2 == "Bermuda Branco" || val2 == "Bermuda Bege" || val2 == "Bermuda Preta"){
     val2 = Number(69.99);
-  }else if(val2 == "Camisa Azul" || "Camisa Vermelha" || "Camisa Verde"){
+  }else if(val2 == "Camiseta Azul" || val2 == "Camiseta Vermelha" || val2 == "Camiseta Verde"){
     val2 = Number(59.99);
-  }else if(val2 == "Calça Marrom" || "Jean Azul" || "Jeans Preta"){
+  }else if(val2 == "Calça Marrom" || val2 == "Calça Jeans Azul" || val2 == "Calça Jeans Preta"){
     val2 = Number(89.99);
   }
   const soma = val1 + val2;
