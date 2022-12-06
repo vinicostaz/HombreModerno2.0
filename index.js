@@ -1,38 +1,65 @@
-const express = require('express');
+                          const express = require('express');
 const fs = require('fs');
 
 const app = express();
 const bodyparser = require('body-parser');
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.urlencoded({extended: true}));
 
 let html = fs.readFileSync('index.html');
+
 app.get('/comprar', (req, res) => {
   res.sendFile(__dirname + "/comprar.html");
 });
+
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + "/login.html");
+});
+
+var login = "usuario";
+var password = "1234";
+
+app.post('/login', (req, res) => {
+  
+  if(req.body.password == password && req.body.login == login) {
+    req.login = login;
+    res.end(fs.readFileSync('logado.html'));
+  } else {
+    res.end(fs.readFileSync('login.html'));
+  }
+});
+app.get('/login', (req, res) =>{
+  if(req.login) {
+    res.end(fs.readFileSync('logado.html'));
+  } else {
+    res.end(fs.readFileSync('login.html'));
+  }
+});
+
 app.post('/comprar', (req, res) => {
   var val1 = req.body.val1;
-  if (val1 == "Norte") {
+  if(val1 == "Norte"){
     val1 = Number(15);
-  } else if (val1 == "Nordeste") {
+  }else if(val1 == "Nordeste"){
     val1 = Number(13);
-  } else if (val1 == "Centro Oeste") {
+  }else if(val1 == "Centro Oeste"){
     val1 = Number(18);
-  } else if (val1 == "Sudeste") {
+  }else if(val1 == "Sudeste"){
     val1 = Number(20);
-  } else if (val1 == "Sul") {
+  }else if(val1 == "Sul"){
     val1 = Number(22);
   }
   var val2 = req.body.val2;
-  if (val2 == "Bermuda Branco" || "Bermuda Bege" || "Bermuda Preta") {
+  if(val2 == "Bermuda Branco" || "Bermuda Bege" || "Bermuda Preta"){
     val2 = Number(69.99);
-  } else if (val2 == "Camisa Azul" || "Camisa Vermelha" || "Camisa Verde") {
+  }else if(val2 == "Camisa Azul" || "Camisa Vermelha" || "Camisa Verde"){
     val2 = Number(59.99);
-  } else if (val2 == "Calça Marrom" || "Jean Azul" || "Jeans Preta") {
+  }else if(val2 == "Calça Marrom" || "Jean Azul" || "Jeans Preta"){
     val2 = Number(89.99);
   }
   const soma = val1 + val2;
   res.send("O seu valor de compra final é: " + soma);
-});
+});  
+
 app.get('/', (req, res) => {
   res.send(html)
 });
@@ -61,10 +88,18 @@ app.get('/QS', (req, res) => {
   res.end(fs.readFileSync('QS.html'));
 })
 
-
 app.get('/index', (req, res) => {
   res.end(fs.readFileSync('index.html'));
 })
+
+app.get('/login', (req, res) => {
+  res.end(fs.readFileSync('login.html'));
+})
+
+app.get('/logado', (req, res) => {
+  res.end(fs.readFileSync('logado.html'));
+})
+
 app.listen(3000, () => {
   console.log('Servidor iniciado...');
 });
