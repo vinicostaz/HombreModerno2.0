@@ -1,9 +1,9 @@
-                             const express = require('express');
+const express = require('express');
 const fs = require('fs');
 
 const app = express();
 const bodyparser = require('body-parser');
-app.use(bodyparser.urlencoded({extended: true}));
+app.use(bodyparser.urlencoded({ extended: true }));
 
 let html = fs.readFileSync('index.html');
 
@@ -19,7 +19,7 @@ app.get('/registro', (req, res) => {
   res.sendFile(__dirname + "/registro.html");
 });
 
-app.post('/registrado', function(req, res){
+app.post('/registrado', function(req, res) {
   var nome = req.body.nome;
   var sobrenome = req.body.sobrenome;
   var email = req.body.email;
@@ -30,7 +30,16 @@ app.post('/registrado', function(req, res){
   console.log(senha);
   res.send(req.body.nome + " " + req.body.sobrenome + ', sua conta foi criada com sucesso.');
 });
-app.post('/contato', function(req, res){
+
+app.post('/logado', function(req, res) {
+  var login = req.body.login;
+  var password = req.body.password;
+  console.log(login);
+  console.log(password);
+  res.send('Parabéns' + req.body.login + ', login feito com sucesso');
+});
+
+app.post('/contato', function(req, res) {
   var nome = req.body.nome;
   var telefone = req.body.telefone;
   var email = req.body.email;
@@ -47,16 +56,16 @@ var login = "usuario";
 var password = "1234";
 
 app.post('/login', (req, res) => {
-  
-  if(req.body.password == password && req.body.login == login) {
+
+  if (req.body.password == password && req.body.login == login) {
     req.login = login;
     res.end(fs.readFileSync('logado.html'));
   } else {
     res.end(fs.readFileSync('login.html'));
   }
 });
-app.get('/login', (req, res) =>{
-  if(req.login) {
+app.get('/login', (req, res) => {
+  if (req.login) {
     res.end(fs.readFileSync('logado.html'));
   } else {
     res.end(fs.readFileSync('login.html'));
@@ -65,28 +74,28 @@ app.get('/login', (req, res) =>{
 
 app.post('/comprar', (req, res) => {
   var val1 = req.body.val1;
-  if(val1 == "Norte"){
+  if (val1 == "Norte") {
     val1 = Number(15);
-  }else if(val1 == "Nordeste"){
+  } else if (val1 == "Nordeste") {
     val1 = Number(13);
-  }else if(val1 == "Centro Oeste"){
+  } else if (val1 == "Centro Oeste") {
     val1 = Number(18);
-  }else if(val1 == "Sudeste"){
+  } else if (val1 == "Sudeste") {
     val1 = Number(20);
-  }else if(val1 == "Sul"){
+  } else if (val1 == "Sul") {
     val1 = Number(22);
   }
   var val2 = req.body.val2;
-  if(val2 == "Bermuda Branco" || val2 == "Bermuda Bege" || val2 == "Bermuda Preta"){
+  if (val2 == "Bermuda Branco" || val2 == "Bermuda Bege" || val2 == "Bermuda Preta") {
     val2 = Number(69.99);
-  }else if(val2 == "Camiseta Azul" || val2 == "Camiseta Vermelha" || val2 == "Camiseta Verde"){
+  } else if (val2 == "Camiseta Azul" || val2 == "Camiseta Vermelha" || val2 == "Camiseta Verde") {
     val2 = Number(59.99);
-  }else if(val2 == "Calça Marrom" || val2 == "Calça Jeans Azul" || val2 == "Calça Jeans Preta"){
+  } else if (val2 == "Calça Marrom" || val2 == "Calça Jeans Azul" || val2 == "Calça Jeans Preta") {
     val2 = Number(89.99);
   }
   const soma = val1 + val2;
   res.send("O seu valor de compra final é: " + soma);
-});  
+});
 
 app.get('/', (req, res) => {
   res.send(html)
