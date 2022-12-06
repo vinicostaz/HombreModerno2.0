@@ -3,36 +3,36 @@ const fs = require('fs');
 
 const app = express();
 const bodyparser = require('body-parser');
-app.use(bodyparser.urlencoded({extended: true}));
+app.use(bodyparser.urlencoded({ extended: true }));
 
 let html = fs.readFileSync('index.html');
 app.get('/comprar', (req, res) => {
   res.sendFile(__dirname + "/comprar.html");
 });
 app.post('/comprar', (req, res) => {
-  const val1 = Number(req.body.val1);
-  if(val1 == "Norte"){
-    val1 = 15;
-  }else if(val1 == "Nordeste"){
-    val1 = 13;
-  }else if(val1 == "Centro Oeste"){
-    val1 = 18;
-  }else if(val1 == "Sudeste"){
-    val1 = 20;
-  }else if(val1 == "Sul"){
-    val1 = 22;
+  var val1 = req.body.val1;
+  if (val1 == "Norte") {
+    val1 = Number(15);
+  } else if (val1 == "Nordeste") {
+    val1 = Number(13);
+  } else if (val1 == "Centro Oeste") {
+    val1 = Number(18);
+  } else if (val1 == "Sudeste") {
+    val1 = Number(20);
+  } else if (val1 == "Sul") {
+    val1 = Number(22);
   }
-  const val2 = Number(req.body.val2);
-  if(val2 == "Bermuda Branco" || "Bermuda Bege" || "Bermuda Preta"){
-    val2 = 69,99;
-  }else if(val2 == "Camisa Azul" || "Camisa Vermelha" || "Camisa Verde"){
-    val2 = 59,99;
-  }else if(val2 == "Calça Marrom" || "Jean Azul" || "Jeans Preta"){
-    val2 = 89,99;
+  var val2 = req.body.val2;
+  if (val2 == "Bermuda Branco" || "Bermuda Bege" || "Bermuda Preta") {
+    val2 = Number(69.99);
+  } else if (val2 == "Camisa Azul" || "Camisa Vermelha" || "Camisa Verde") {
+    val2 = Number(59.99);
+  } else if (val2 == "Calça Marrom" || "Jean Azul" || "Jeans Preta") {
+    val2 = Number(89.99);
   }
   const soma = val1 + val2;
   res.send("O seu valor de compra final é: " + soma);
-});  
+});
 app.get('/', (req, res) => {
   res.send(html)
 });
@@ -53,8 +53,8 @@ app.get('/camisetas', (req, res) => {
   res.end(fs.readFileSync('camisetas.html'));
 })
 
-app.get('/produtos', (req, res) => {
-  res.end(fs.readFileSync('produtos.js'));
+app.get('/frete', (req, res) => {
+  res.end(fs.readFileSync('frete.html'));
 })
 
 app.get('/QS', (req, res) => {
