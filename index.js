@@ -1,4 +1,4 @@
-                          const express = require('express');
+const express = require('express');
 const fs = require('fs');
 
 const app = express();
@@ -13,6 +13,22 @@ app.get('/comprar', (req, res) => {
 
 app.get('/login', (req, res) => {
   res.sendFile(__dirname + "/login.html");
+});
+
+app.get('/registro', (req, res) => {
+  res.sendFile(__dirname + "/registro.html");
+});
+
+app.post('/registrado', function(req, res){
+  var nome = req.body.nome;
+  var sobrenome = req.body.sobrenome;
+  var email = req.body.email;
+  var senha = req.body.senha;
+  console.log(nome);
+  console.log(sobrenome);
+  console.log(email);
+  console.log(senha);
+  res.send(req.body.nome + " " + req.body.sobrenome + ', sua conta foi criada com sucesso.');
 });
 
 var login = "usuario";
