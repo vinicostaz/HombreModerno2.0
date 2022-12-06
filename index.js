@@ -30,6 +30,18 @@ app.post('/registrado', function(req, res){
   console.log(senha);
   res.send(req.body.nome + " " + req.body.sobrenome + ', sua conta foi criada com sucesso.');
 });
+app.post('/contato', function(req, res){
+  var nome = req.body.nome;
+  var telefone = req.body.telefone;
+  var email = req.body.email;
+  var mensagem = req.body.mensagem;
+  console.log(nome);
+  console.log(email);
+  console.log(telefone);
+  console.log(mensagem);
+  res.send(req.body.nome + ", Obrigado por enviar suas informações, logo entraremos em contato.");
+});
+
 
 var login = "usuario";
 var password = "1234";
