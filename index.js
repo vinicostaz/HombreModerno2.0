@@ -36,7 +36,7 @@ app.post('/logado', function(req, res) {
   var password = req.body.password;
   console.log(login);
   console.log(password);
-  res.send('Parabéns' + req.body.login + ', login feito com sucesso');
+  res.send('Parabéns ' + req.body.login + ', login feito com sucesso');
 });
 
 app.post('/contato', function(req, res) {
